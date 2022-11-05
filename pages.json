@@ -30,15 +30,20 @@
   ],
   "subPackages": [{
     "root": "subpgk",
-    "pages": [
-      {
-        "path": "goods_detail/goods_detail",
-        "style": {
-          "navigationBarTitleText": "详情",
-          "enablePullDownRefresh": false
-        }
+    "pages": [{
+      "path": "goods_detail/goods_detail",
+      "style": {
+        "navigationBarTitleText": "详情",
+        "enablePullDownRefresh": false
       }
-    ]
+    }, {
+      "path": "goods_list/goods_list",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }]
   }],
 
   "tabBar": {

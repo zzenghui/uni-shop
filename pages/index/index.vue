@@ -13,11 +13,11 @@
     </view>
     <view class="floor" v-for="(item,index) in floorList" :key="index">
       <view class="title">  <image :src="item.floor_title.image_src" mode=""></image> </view>
-      <view class="floor-left">
+      <view class="floor-left" @click="goGoodsListleft(item)" >
         <image :src="item.product_list[0].image_src" mode=""></image>
       </view>
       <view class="floor-right">
-      <view class="floor-right-item" v-for="(item2,index) in item.product_list" :key="index" v-if="index !== 0">
+      <view class="floor-right-item" @click="goGoodsListright(item2,index)" v-for="(item2,index) in item.product_list" :key="index" v-if="index !== 0">
         <image :src="item2.image_src" mode=""></image>
       </view>
         </view>
@@ -67,6 +67,11 @@ export default {
     async getfloorlist(){
       let { data } = await uni.$http.get('/api/public/v1/home/floordata')
       if (data.meta.status === 200) {
+        data.message.forEach((floor)=>{
+          floor.product_list.forEach((prod)=>{
+            prod.url =  '/subpgk/goods_list/goods_list?' + prod.navigator_url.split('?')[1]
+          })
+        })
         this.floorList = data.message
         console.log(this.floorList);
       } else{
@@ -88,6 +93,22 @@ export default {
       } else{
         return 
       }
+    },
+    //跳转到左侧商品列表页
+    goGoodsListleft(item){
+      uni.navigateTo({
+        url:item.product_list[0].url
+      })
+    },
+    //跳转到右侧商品列表页
+    goGoodsListright(item2,index){
+    if(index !== 0){
+      uni.navigateTo({
+        url:item2.url
+      })
+    }else{
+      return
+    }
     }
   },
 
