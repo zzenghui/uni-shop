@@ -28,6 +28,19 @@
 
     }
   ],
+  "subPackages": [{
+    "root": "subpgk",
+    "pages": [
+      {
+        "path": "goods_detail/goods_detail",
+        "style": {
+          "navigationBarTitleText": "详情",
+          "enablePullDownRefresh": false
+        }
+      }
+    ]
+  }],
+
   "tabBar": {
     "color": "gray",
     "selectedColor": "red",
@@ -48,7 +61,7 @@
         "iconPath": "static/images/cart.png",
         "selectedIconPath": "static/images/cart-a.png",
         "text": "购物车"
-      }, 
+      },
       {
         "pagePath": "pages/user/user",
         "iconPath": "static/images/my.png",
@@ -56,6 +69,7 @@
         "text": "我的"
       }
     ]
+
   },
   "globalStyle": {
     "navigationBarTextStyle": "white",
