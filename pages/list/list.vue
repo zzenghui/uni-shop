@@ -1,5 +1,6 @@
 <template>
   <view>
+    <my-search @click='gotoSearch'></my-search>
     <view class="content">
       <scroll-view scroll-y="true" class="scroll-left" :style="{ height: wh + 'px' }">
         <view class="scroll-left-item" :class="index === cateitem ? 'active' : ''" @click="getdata(index)" v-for="(item, index) in cateList" :key="item.cat_id">
@@ -71,6 +72,11 @@ export default {
     goGoodslist(item3){
       uni.navigateTo({
         url:`/subpgk/goods_list/goods_list?cid=${item3.cat_id}`
+      })
+    },
+    gotoSearch(){
+      uni.navigateTo({
+        url:"/subpgk/search/search"
       })
     }
   }

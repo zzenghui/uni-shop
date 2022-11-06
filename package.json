@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/zzenghui/uni-shop#readme",
   "dependencies": {
-    "@escook/request-miniprogram": "^0.2.1"
+    "@escook/request-miniprogram": "^0.2.1",
+    "nanoid": "^4.0.0"
   }
 }

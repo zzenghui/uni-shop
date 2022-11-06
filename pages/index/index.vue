@@ -1,5 +1,8 @@
 <template>
   <view class="content">
+    <view class="search-box">
+      <my-search @click='gotosearch'></my-search>
+    </view>
     <swiper :indicator-dots="true" :autoplay="true" circular="true" :interval="3000" :duration="1000">
       <swiper-item v-for="(L, index) in swiperList" :key="L.goods_id" @click="gomessage(L)"> 
           <image :src="L.image_src"></image>
@@ -73,7 +76,7 @@ export default {
           })
         })
         this.floorList = data.message
-        console.log(this.floorList);
+        // console.log(this.floorList);
       } else{
         return uni.$showMsg()
       }
@@ -109,6 +112,12 @@ export default {
     }else{
       return
     }
+    },
+    //跳转到搜索页面
+    gotosearch(){
+      uni.navigateTo({
+        url:'/subpgk/search/search'
+      })
     }
   },
 
@@ -117,6 +126,12 @@ export default {
 </script>
 
 <style lang="scss">
+  // 吸顶效果
+  .search-box{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
 swiper {
   width: 750rpx;
   height: 300rpx;
