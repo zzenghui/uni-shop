@@ -87,7 +87,7 @@ export default {
       this.historyList.unshift(historyItem);
       uni.setStorageSync('his',JSON.stringify(this.historyList))
     },
-    //清空历史纪律
+    //清空历史记录
     clearHis() {
       this.historyList = []
       uni.setStorageSync('his',[])
