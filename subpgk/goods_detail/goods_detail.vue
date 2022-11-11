@@ -27,7 +27,11 @@
 </template>
 
 <script>
+import {mapMutations,mapGetters} from 'vuex'
 export default {
+  computed:{
+    ...mapGetters('m_cart',['total'])
+  },
   data() {
     return {
       goods_id: '255',
@@ -44,7 +48,7 @@ export default {
         {
           icon: 'cart',
           text: '购物车',
-          info: 9
+          info: 0
         }
       ],
       buttonGroup: [
@@ -61,12 +65,25 @@ export default {
       ]
     };
   },
+  watch:{
+    total:{
+      immediate:true,
+      handler(newValue){
+        const findResult = this.options.find(x=>x.text==='购物车')
+        if(findResult){
+          findResult.info = newValue
+      }
+    }
+    }
+  },
   onLoad(e) {
     this.goods_id = e.goods_id;
     console.log(this.goods_id);
     this.getgoodsDetail();
   },
   methods: {
+    //获取vuex中的mutations方法
+    ...mapMutations('m_cart',['addtoCart']),
     //获取商品详情数据
     async getgoodsDetail() {
       let { data } = await uni.$http.get(`/api/public/v1/goods/detail?goods_id=${this.goods_id}`);
@@ -95,8 +112,18 @@ export default {
      }
     },
     buttonClick(e) {
-      console.log(e);
-      this.options[1].info++;
+      if(e.content.text === "加入购物车"){
+        const goods ={
+          goods_id:this.goods_info.goods_id,
+          goods_name:this.goods_info.goods_name,
+          goods_price:this.goods_info.goods_price,
+          goods_count:1,
+          goods_small_logo:this.goods_info.goods_small_logo,
+          goods_state:true
+        }
+        this.addtoCart(goods)
+        
+      }
     }
   }
 };

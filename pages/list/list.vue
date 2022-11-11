@@ -24,6 +24,7 @@
 </template>
 
 <script>
+   import setBadge from '../../mixins/tabbar-badge.js'
 export default {
   data() {
     return {
@@ -39,6 +40,7 @@ export default {
       scrollTop:0
     };
   },
+  mixins: [setBadge],
   onLoad() {
     // 获取当前系统的信息
     const sysInfo = uni.getSystemInfoSync();
