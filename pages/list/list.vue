@@ -1,22 +1,24 @@
 <template>
   <view>
-    <my-search @click='gotoSearch'></my-search>
+    <my-search @click="gotoSearch"></my-search>
     <view class="content">
       <scroll-view scroll-y="true" class="scroll-left" :style="{ height: wh + 'px' }">
         <view class="scroll-left-item" :class="index === cateitem ? 'active' : ''" @click="getdata(index)" v-for="(item, index) in cateList" :key="item.cat_id">
           {{ item.cat_name }}
         </view>
       </scroll-view>
-      <scroll-view scroll-y="true" :style="{ height: wh + 'px' }" :scroll-top='scrollTop'>
+      <scroll-view scroll-y="true" :style="{ height: wh + 'px' }" :scroll-top="scrollTop">
         <view class="cate-lv2" v-for="(l, index) in cateList2" :key="l.cat_id">
           <!-- 二级分类的标题 -->
           <view class="cate-lv2-title">/{{ l.cat_name }}/</view>
           <!-- 三级分类 -->
-          <view class="cate-lv3"><view class="cate-lv3-item" @click="goGoodslist(l3)" v-for="(l3, index) in l.children" :key="l3.cat_id">
-          <!-- 三级分类的item -->
-          <image :src="l3.cat_icon.replace('dev','web')"></image> 
-          <text> {{l3.cat_name}} </text>
-          </view></view>
+          <view class="cate-lv3">
+            <view class="cate-lv3-item" @click="goGoodslist(l3)" v-for="(l3, index) in l.children" :key="l3.cat_id">
+              <!-- 三级分类的item -->
+              <image :src="l3.cat_icon.replace('dev', 'web')"></image>
+              <text>{{ l3.cat_name }}</text>
+            </view>
+          </view>
         </view>
       </scroll-view>
     </view>
@@ -24,7 +26,7 @@
 </template>
 
 <script>
-   import setBadge from '../../mixins/tabbar-badge.js'
+import setBadge from '../../mixins/tabbar-badge.js';
 export default {
   data() {
     return {
@@ -37,7 +39,7 @@ export default {
       //获取二级分类数据
       cateList2: [],
       //设置返回时滚动条的位置
-      scrollTop:0
+      scrollTop: 0
     };
   },
   mixins: [setBadge],
@@ -65,21 +67,21 @@ export default {
     getdata(index) {
       this.cateitem = index;
       //将scrollTop重置成0(注意:scrollTop的值前后不能设置一样)
-      this.scrollTop = this.scrollTop === 0? 1 : 0
+      this.scrollTop = this.scrollTop === 0 ? 1 : 0;
       // 重新未二级分类赋值
       this.cateList2 = this.cateList[index].children;
       // console.log(this.cateList2);
     },
     //点击三级分类之后跳转
-    goGoodslist(item3){
+    goGoodslist(item3) {
       uni.navigateTo({
-        url:`/subpgk/goods_list/goods_list?cid=${item3.cat_id}`
-      })
+        url: `/subpgk/goods_list/goods_list?cid=${item3.cat_id}`
+      });
     },
-    gotoSearch(){
+    gotoSearch() {
       uni.navigateTo({
-        url:"/subpgk/search/search"
-      })
+        url: '/subpgk/search/search'
+      });
     }
   }
 };
@@ -125,7 +127,7 @@ export default {
   }
   .cate-lv3 {
     width: 100%;
-    display: flex; 
+    display: flex;
     flex-wrap: wrap;
     .cate-lv3-item {
       width: 32%;
@@ -136,7 +138,7 @@ export default {
       align-content: center;
       flex-direction: column;
       font-size: 12px;
-      image{
+      image {
         width: 100%;
         height: 70%;
       }

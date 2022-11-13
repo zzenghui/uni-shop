@@ -51,6 +51,13 @@
         "enablePullDownRefresh": false
       }
 
+    }, {
+      "path": "addressInfo/addressInfo",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
     }]
   }],
 

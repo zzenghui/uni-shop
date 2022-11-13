@@ -83,9 +83,11 @@ export default {
       //     return this.historyList.unshift(historyItem);
       //   }
       // })
-      const historyItem = {id: nanoid(), title:this.keyword};
-      this.historyList.unshift(historyItem);
-      uni.setStorageSync('his',JSON.stringify(this.historyList))
+    
+        const historyItem = {id: nanoid(), title:this.keyword};
+        this.historyList.unshift(historyItem);
+        uni.setStorageSync('his',JSON.stringify(this.historyList))
+     
     },
     //清空历史记录
     clearHis() {
