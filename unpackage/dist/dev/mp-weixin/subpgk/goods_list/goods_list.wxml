@@ -1,0 +1,1 @@
+<view><block wx:for="{{goodsList}}" wx:for-item="item" wx:for-index="index"><my-goods vue-id="{{'2ed3ce64-1-'+index}}" defaultPic="{{defaultPic}}" item="{{item}}" data-event-opts="{{[['tap',[['gotogoodsDetail',['$0'],[[['goodsList','',index]]]]]]]}}" bindtap="__e" bind:__l="__l"></my-goods></block></view>

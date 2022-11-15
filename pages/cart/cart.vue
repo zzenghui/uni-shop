@@ -20,7 +20,7 @@
         </block>
       </uni-swipe-action>
     </view>
-    <my-settle></my-settle>
+    <my-settle :address="address"></my-settle>
   </view>
 </template>
 
@@ -43,7 +43,11 @@ export default {
     };
   },
   onLoad(e) {
-    this.address = JSON.parse(e.address)
+    if(e.address){
+      this.address = JSON.parse(e.address)
+    }else{
+      this.address = JSON.parse(uni.getStorageSync('address'))
+    }
   },
   computed: {
     ...mapState('m_cart', ['cart'])

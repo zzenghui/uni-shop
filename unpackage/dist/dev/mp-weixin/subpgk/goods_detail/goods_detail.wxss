@@ -1,0 +1,64 @@
+
+.content {
+  padding-bottom: 50px;
+}
+.good_nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+swiper {
+  width: 100%;
+  height: 350px;
+}
+swiper-item {
+  width: 100%;
+  height: 100%;
+}
+swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+.goods_info_box .price {
+  width: 50px;
+  height: 30px;
+  color: red;
+  text-align: center;
+  line-height: 30px;
+  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.goods_info_body {
+  width: 100%;
+  height: 60px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+.goods_info_body .detail {
+  width: 70%;
+  float: left;
+}
+.goods_info_body .love {
+  float: right;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  padding-right: 30px;
+  font-size: 14px;
+  color: #555;
+}
+.goods_info_body .love image {
+  width: 15px;
+  height: 15px;
+}
+.quick {
+  height: 50px;
+  line-height: 50px;
+  margin-left: 20px;
+  font-size: 14px;
+  color: #555;
+}
+

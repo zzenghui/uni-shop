@@ -46,6 +46,9 @@
         ]
       };
     },
+    onLoad() {
+      uni.setStorageSync('address',JSON.stringify(this.address[0]))
+    },
     methods: {
       gotocart(addr) {
         uni.showModal({
