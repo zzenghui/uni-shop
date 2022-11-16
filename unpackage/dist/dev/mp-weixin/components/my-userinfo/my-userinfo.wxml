@@ -1,1 +1,1 @@
-<view>用户信息组件</view>
+<view><view class="userInfotop"><view class="picture"><image src="../../static/images/photo.png" mode></image><view class="_p">岁月,轻饶我、</view></view></view></view>

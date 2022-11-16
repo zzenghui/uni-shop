@@ -12,17 +12,43 @@
 </template>
 
 <script>
-  import {mapMutations} from 'vuex'
+import { mapMutations, mapState } from 'vuex';
 export default {
   name: 'my-login',
   data() {
     return {};
   },
   methods: {
-    ...mapMutations('m_user',['updateUserInfo','updateUserToken']),
-    getUserInfo(){
-      let token = "adawdhwahdawjhdjkawhkjd"
-      this.updateUserToken(token)
+    ...mapState('m_user',['redirectInfo']),
+    ...mapMutations('m_user', ['updateUserInfo', 'updateUserToken','updateRedirectInfo']),
+    getUserInfo() {
+      let token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIzLCJpYXQiOjE1NjQ3MzAwNzksImV4cCI6MTAwMTU2NDczMDA3OH0.YPt-XeLnjV-_1ITaXGY2FhxmCe4NvXuRnRB8OMCfnPo';
+      uni.showLoading({
+        title: '登陆中,请稍后..'
+      });
+      setTimeout(() => {
+        this.updateUserToken(token);
+        uni.hideLoading();
+         // 判断 vuex 中的 redirectInfo 是否为 null
+          // 如果不为 null，则登录成功之后，需要重新导航到对应的页面
+          this.navigateBack()
+      }, 1000);
+    },
+    // 返回登录之前的页面
+    navigateBack() {
+      // redirectInfo 不为 null，并且导航方式为 switchTab
+      console.log(this.redirectInfo());
+      if (this.redirectInfo() && this.redirectInfo().openType === 'switchTab') {
+        // 调用小程序提供的 uni.switchTab() API 进行页面的导航
+        uni.switchTab({
+          // 要导航到的页面地址
+          url: this.redirectInfo().from,
+          // 导航成功之后，把 vuex 中的 redirectInfo 对象重置为 null
+          success: () => {
+            this.updateRedirectInfo(null)
+          }
+        })
+      }
     }
     //获取用户基本信息
     // getUserInfo() {
@@ -38,31 +64,31 @@ export default {
     //    }
     //  })
     // },
-   // async getToken(info){
-   //   const [err,res] = await uni.login().catch(err => err)
-   //   console.log(res);
-   //  if(err || res.errMsg !== 'login:ok'){
-   //    return uni.$showMsg('登陆失败')
-   //  }
-   //   const query = {
-   //      code: res.code,
-   //      encryptedData: info.encryptedData,
-   //      iv: info.iv,
-   //      rawData: info.rawData,
-   //      signature: info.signature
-   //    }
-   //    let token = query.code+query.iv
-   //    console.log(token);
-   //    this.updateUserToken(token)
-      //换取token
-      // const {data:loginResult} = await uni.$http.post('/api/public/v1/users/wxlogin',query)
-      // console.log(loginResult);
-      // if(loginResult.meta.status == 200){
-      //   return uni.$showMsg('登陆成功')
-      // }
-      // uni.$showMsg('登陆失败')
-   // } 
-  },
+    // async getToken(info){
+    //   const [err,res] = await uni.login().catch(err => err)
+    //   console.log(res);
+    //  if(err || res.errMsg !== 'login:ok'){
+    //    return uni.$showMsg('登陆失败')
+    //  }
+    //   const query = {
+    //      code: res.code,
+    //      encryptedData: info.encryptedData,
+    //      iv: info.iv,
+    //      rawData: info.rawData,
+    //      signature: info.signature
+    //    }
+    //    let token = query.code+query.iv
+    //    console.log(token);
+    //    this.updateUserToken(token)
+    //换取token
+    // const {data:loginResult} = await uni.$http.post('/api/public/v1/users/wxlogin',query)
+    // console.log(loginResult);
+    // if(loginResult.meta.status == 200){
+    //   return uni.$showMsg('登陆成功')
+    // }
+    // uni.$showMsg('登陆失败')
+    // }
+  }
 };
 </script>
 
